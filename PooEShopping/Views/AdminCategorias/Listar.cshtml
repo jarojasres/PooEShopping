@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Categoria>
+@{
+    ViewData["Title"] = "Listar";
+}
+
+<h2>Listar</h2>
+<a asp-controller="AdminCategorias" asp-action="Agregar" class="btn btn-primary">Agregar</a>
+<table class="table">
+    <thead>
+        <tr>
+            <td>Nombre</td>
+            <td>Descripción</td>
+            <td>&nbsp;</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var categoria in Model) {
+        <tr>
+            <td>@categoria.Nombre</td>
+            <td>@categoria.Descripcion</td>
+            <td><a asp-controller="AdminCategorias" asp-action="Modificar" asp-route-id="@categoria.Id" class="btnEditar">Editar</a> 
+                <a asp-controller="AdminCategorias" asp-action="Eliminar" asp-route-id="@categoria.Id" data-nombre="@categoria.Nombre" class="btnEliminar">Eliminar</a></td>
+
+        </tr>
+        }
+        <tr></tr>
+    </tbody>
+</table>
+
+<div id="modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Eliminar Categoría</h4>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" id="url" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button id="btnAceptar" type="button" class="btn btn-primary">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+
+    <script src="~/js/listar/listar.js" asp-append-version="true"></script>
+
+}
+
